@@ -1,0 +1,41 @@
+<h1>Support Requests</h1>
+
+<div class="search">
+<%= form_tag(requests_path, :method => "get") do %>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search" %>
+<% end %>
+</div>
+
+<br>
+<%# if @requests.present? %>
+  <%#= render @requests %>
+<%# else %>
+  <!-- <p>Sorry, we could not find what you were looking for...</p> -->
+<%# end %>
+
+<table>
+  <thead>
+  <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Message</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= request.name %></td>
+        <td><%= request.email %></td>
+        <td><%= request.department %></td>
+        <td><%= request.message %></td>
+        <td><%= link_to "Edit", edit_request_path(request) %> <%= link_to "Delete", request, method: :delete, data: {confirm: "Are you sure?"} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<% @requests %>
