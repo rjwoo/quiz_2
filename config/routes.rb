@@ -1,12 +1,9 @@
 Rails.application.routes.draw do
 
   root "home#index"
+  get "/requests/search" => "requests#search"
   resources :requests
-  resources :requests do
-    member do
-      get :flop
-    end
-  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

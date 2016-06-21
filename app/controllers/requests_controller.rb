@@ -1,9 +1,7 @@
 class RequestsController < ApplicationController
 
-
   def index
     @requests = Request.all
-    @requests = Request.paginate(:page => params[:page], :per_page => 7)
   end
 
   def new
@@ -24,8 +22,12 @@ class RequestsController < ApplicationController
     @request = Request.find params[:id]
   end
 
-  def edit
-    @request = Request.find params[:id]
+  def search
+    if params[:search]
+      @requests = Request.all.search(params[:search])
+    else
+      @requests = Request.all.order('created_at DESC')
+    end
   end
 
   def edit
